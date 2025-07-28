@@ -1,10 +1,10 @@
-
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import Updater, CommandHandler, CallbackQueryHandler, MessageHandler, Filters
 from flask import Flask
 from threading import Thread
 import os
 
+# === KEEP ALIVE SETUP ===
 app = Flask('')
 
 @app.route('/')
@@ -18,7 +18,8 @@ def keep_alive():
     t = Thread(target=run)
     t.start()
 
-TOKEN = os.getenv("TOKEN")
+# === BOT SETUP ===
+TOKEN = os.environ.get("TOKEN")  # Gunakan dari ENV, aman untuk hosting
 
 main_message = (
     "🎉 *Selamat datang juragan di BAHASENAK* 🎉\n\n"
@@ -38,6 +39,7 @@ transfer_message = (
     "Silahkan transfer ke nomor ini ya juragan:\n"
     "DANA: 081311361110\n"
     "Atas Nama: JAXX TEGXX HARXX\n\n"
+    "REKENING CUMAN DANA JURAGAN.\n\n"
     "Jika sudah, bot akan *otomatis mengundang kamu kedalam groupnya!* 🧙‍♂️ Admin : @Jancuk168\n\n"
     "_Untuk kembali ke menu utama, cukup ketik /start ya juragan_ 🔄"
 )
@@ -90,6 +92,7 @@ def button_handler(update, context):
         user_transfer_state.add(user_id)
         query.edit_message_text(transfer_message, parse_mode="Markdown")
 
+# === JALANKAN BOT ===
 keep_alive()
 updater = Updater(TOKEN, use_context=True)
 dp = updater.dispatcher
