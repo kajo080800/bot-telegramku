@@ -1,9 +1,9 @@
 services:
   - type: web
     name: botajo
-    runtime: python
-    buildCommand: ""
-    startCommand: "python botajo.py"
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: python botajo.py
     envVars:
       - key: TOKEN
-        value: your_bot_token
+        sync: false
