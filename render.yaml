@@ -1,9 +1,9 @@
 services:
   - type: web
-    name: botajo
-    env: python
-    buildCommand: pip install -r requirements.txt
-    startCommand: python botajo.py
+    name: bot-telegramku
+    runtime: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "python botajo.py"
     envVars:
       - key: TOKEN
-        sync: false
+        sync: false  # Token ditambahkan lewat dashboard, bukan di file
